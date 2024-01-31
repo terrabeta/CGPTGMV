@@ -245,27 +245,27 @@
   <div class="grid-container">
     <div class="player-container">
       <video class="hls-player" id="player1" controls muted autoplay></video>
-      <div class="player-title player1">ERT NEWS</div>
+      <div class="player-title player1">ANT1</div>
     </div>
     <div class="player-container">
       <video class="hls-player" id="player2" controls muted autoplay></video>
-      <div class="player-title player2">ANT1</div>
+      <div class="player-title player2">ALPHA</div>
     </div>
     <div class="player-container">
       <video class="hls-player" id="player3" controls muted autoplay></video>
-      <div class="player-title player3">ALPHA</div>
+      <div class="player-title player3">SKAI</div>
     </div>
     <div class="player-container">
       <video class="hls-player" id="player4" controls muted autoplay></video>
-      <div class="player-title player4">ACTION 24</div>
+      <div class="player-title player4">ERT NEWS</div>
     </div>
     <div class="player-container">
       <video class="hls-player" id="player5" controls muted autoplay></video>
-      <div class="player-title player5">SKAI</div>
+      <div class="player-title player5">OPEN</div>
     </div>
     <div class="player-container">
       <video class="hls-player" id="player6" controls muted autoplay></video>
-      <div class="player-title player6">OPEN</div>
+      <div class="player-title player6">STAR</div>
     </div>
     <div class="player-container">
       <video class="hls-player" id="player7" controls muted autoplay></video>
@@ -273,7 +273,7 @@
     </div>
     <div class="player-container">
       <video class="hls-player" id="player8" controls muted autoplay></video>
-      <div class="player-title player8">ATTICA TV</div>
+      <div class="player-title player8">VOULI</div>
     </div>
   </div>
 
@@ -306,14 +306,14 @@
     function initializePlayers() {
       var players = document.querySelectorAll(".hls-player");
       var urls = [
-        "https://cbd537474fbad4634b64787657ff6456.msvdn.net/news/ert_news_main/main_540/chunks_dvr.m3u8",
         "https://d1nfykbwa3n98t.cloudfront.net/out/v1/6e5667da5a6843899a337dea72adb61b/antenna_3.m3u8",
         "https://alphatvlive.siliconweb.com/1/Y2Rsd1lUcUVoajcv/UVdCN25h/hls/live/playlist.m3u8",
-        "https://actionlive.siliconweb.com/actionabr/actiontv/playlist.m3u89",
         "https://skai-live-back.siliconweb.com/media/cambria4/index_bitrate600K.m3u8",
+        "https://cbd537474fbad4634b64787657ff6456.msvdn.net/news/ert_news_main/main_540/chunks_dvr.m3u8",
         "https://liveopencloud.siliconweb.com/1/ZlRza2R6L2tFRnFJ/eWVLSlQx/hls/live/playlist.m3u8",
+        "https://livestar.siliconweb.com/media/star1/star1lowhd.m3u8",
         "https://c98db5952cb54b358365984178fb898a.msvdn.net/live/S86713049/gonOwuUacAxM/chunklist_b732000.m3u8",
-        "https://atticatv.siliconweb.com/atticatv/atticaliveabr/playlist.m3u89"
+        "https://streamer-cache.grnet.gr/parliament/hls/webtv_640_640x360/index.m3u8"
       ];
 
       players.forEach(function(player, index) {
