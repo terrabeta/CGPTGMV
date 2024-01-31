@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid with HLS Players and Titles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      overflow: auto;
+      background: linear-gradient(0deg, rgba(3, 46, 122, 1) 0%, rgba(0, 150, 255, 1) 40%, rgba(230, 14, 39, 1) 76%);
+      color: #ddeaff;
+      font-family: 'Space Mono', monospace;
+      font-weight: 600;
+      min-height: 100vh;
+      text-transform: uppercase;
+    }
+
+    #header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      background: linear-gradient(90deg, rgba(3, 46, 122, 1) 0%, rgba(0, 150, 255, 1) 61%, rgba(230, 14, 39, 1) 100%);
+      z-index: 1;
+      font-size: 53px;
+    }
+
+    .clock-container {
+      text-align: center;
+    }
+
+    .clock {
+      display: inline-block;
+      padding-right: 0;
+      margin: 0 20px;
+    }
+
+    .date {
+      padding-right: 0;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 0;
+      z-index: 0;
+    }
+
+    .player-container {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0px 0px 20px 0px #00000058
+    }
+
+    .hls-player {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      cursor: pointer;
+      display: block;
+      border: none;
+      margin: 0;
+      padding: 0;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
+    }
+
+    .hls-player:hover {
+      filter: grayscale(0%);
+    }
+
+    .player-title {
+      font-size: 25px;
+      padding-top: 0px;
+      padding-bottom: 2px;
+      margin: 0;
+      background: linear-gradient(270deg, rgba(3, 46, 122, 1) 0%, rgba(0, 150, 255, 1) 61%, rgba(230, 14, 39, 1) 100%);
+      filter: grayscale(100%);
+      height: 100%;
+      transition: filter 0.5s ease;
+    }
+
+    .grid-container:not(:hover) .player-title {
+      filter: grayscale(0%);
+    }
+
+    .player-container:hover .hls-player {
+      filter: grayscale(0%);
+    }
+
+    .player-container:hover .player-title {
+      filter: grayscale(0%);
+    }
+
+    .player-container:hover .hls-player:not(:hover) {
+      filter: grayscale(100%);
+    }
+
+    .player-title:hover {
+      filter: grayscale(100%);
+    }
+
+    .player-title.player1 {
+      background-color: #e74c3c;
+    }
+
+    .player-title.player2 {
+      background-color: #2ecc71;
+    }
+
+    .player-title.player3 {
+      background-color: #f39c12;
+    }
+
+    .player-title.player4 {
+      background-color: #9b59b6;
+    }
+
+    .player-title.player5 {
+      background-color: #e67e22;
+    }
+
+    .player-title.player6 {
+      background-color: #1abc9c;
+    }
+
+    .player-title.player7 {
+      background-color: #3498db;
+    }
+
+    .player-title.player8 {
+      background-color: #2c3e50;
+    }
+
+    #content {
+      font-size: 85px;
+      font-style: italic;
+    }
+
+    #outer {
+      overflow: hidden;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      z-index: -1;
+    }
+
+    #outer div {
+      display: inline-block;
+    }
+
+    #loop {
+      white-space: nowrap;
+      animation: loop-anim 85s linear infinite;
+    }
+
+    @media screen and (max-width: 1150px) {
+      .grid-container {
+        display: block;
+      }
+
+      #outer {
+        position: relative;
+      }
+
+      #header {
+        display: grid;
+        line-height: 66px;
+        font-size: 60px;
+      }
+
+      .player-title {
+        font-size: 40px;
+      }
+    }
+
+    @keyframes loop-anim {
+      0% {
+        margin-left: 0;
+      }
+      100% {
+        margin-left: -50%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="header">
+    <div class="date" id="current-date"></div>
+    <div class="clock-container">
+      <div class="clock" id="local-time"></div>
+    </div>
+  </div>
+
+  <div class="grid-container">
+    <div class="player-container">
+      <video class="hls-player" id="player1" controls muted autoplay></video>
+      <div class="player-title player1">ERT NEWS</div>
+    </div>
+    <div class="player-container">
+      <video class="hls-player" id="player2" controls muted autoplay></video>
+      <div class="player-title player2">ANT1</div>
+    </div>
+    <div class="player-container">
+      <video class="hls-player" id="player3" controls muted autoplay></video>
+      <div class="player-title player3">ALPHA</div>
+    </div>
+    <div class="player-container">
+      <video class="hls-player" id="player4" controls muted autoplay></video>
+      <div class="player-title player4">ACTION 24</div>
+    </div>
+    <div class="player-container">
+      <video class="hls-player" id="player5" controls muted autoplay></video>
+      <div class="player-title player5">SKAI</div>
+    </div>
+    <div class="player-container">
+      <video class="hls-player" id="player6" controls muted autoplay></video>
+      <div class="player-title player6">OPEN</div>
+    </div>
+    <div class="player-container">
+      <video class="hls-player" id="player7" controls muted autoplay></video>
+      <div class="player-title player7">MEGA</div>
+    </div>
+    <div class="player-container">
+      <video class="hls-player" id="player8" controls muted autoplay></video>
+      <div class="player-title player8">ATTICA TV</div>
+    </div>
+  </div>
+
+  <div id="outer">
+    <div>
+      <div id="loop">
+        <div id="content">ACTION 24 / ATTICA TV /&nbsp;</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    function updateClocks() {
+      var options = {
+        hour12: false
+      };
+      var now = new Date();
+      var localTime = now.toLocaleTimeString('en-GB', options);
+      document.getElementById("local-time").innerHTML = localTime;
+
+      var currentDate = now.toLocaleDateString('en-GB').replace(/\//g, '/');
+      document.getElementById("current-date").innerHTML = currentDate;
+    }
+
+    function initializePlayers() {
+      var players = document.querySelectorAll(".hls-player");
+      var urls = [
+        "https://cbd537474fbad4634b64787657ff6456.msvdn.net/news/ert_news_main/main_540/chunks_dvr.m3u8",
+        "https://d1nfykbwa3n98t.cloudfront.net/out/v1/6e5667da5a6843899a337dea72adb61b/antenna_3.m3u8",
+        "https://alphatvlive.siliconweb.com/1/Y2Rsd1lUcUVoajcv/UVdCN25h/hls/live/playlist.m3u8",
+        "https://actionlive.siliconweb.com/actionabr/actiontv/playlist.m3u89",
+        "https://skai-live-back.siliconweb.com/media/cambria4/index_bitrate600K.m3u8",
+        "https://liveopencloud.siliconweb.com/1/ZlRza2R6L2tFRnFJ/eWVLSlQx/hls/live/playlist.m3u8",
+        "https://c98db5952cb54b358365984178fb898a.msvdn.net/live/S86713049/gonOwuUacAxM/chunklist_b732000.m3u8",
+        "https://atticatv.siliconweb.com/atticatv/atticaliveabr/playlist.m3u89"
+      ];
+
+      players.forEach(function(player, index) {
+        var hls = new Hls();
+        var url = urls[index];
+
+        hls.loadSource(url);
+        hls.attachMedia(player);
+
+        player.addEventListener('mouseenter', function() {
+          player.muted = false;
+          players.forEach(function(otherPlayer) {
+            if (otherPlayer !== player) {
+              otherPlayer.style.filter = 'grayscale(100%)';
+            }
+          });
+        });
+
+        player.addEventListener('mouseleave', function() {
+          player.muted = true;
+          players.forEach(function(otherPlayer) {
+            otherPlayer.style.filter = 'grayscale(0%)';
+          });
+        });
+      });
+    }
+
+    window.addEventListener('load', function() {
+      var players = document.querySelectorAll(".hls-player");
+      players.forEach(function(player) {
+        player.style.filter = 'grayscale(0%)';
+      });
+    });
+
+    setInterval(updateClocks, 1000);
+    initializePlayers();
+
+    let outer = document.querySelector("#outer");
+    let content = outer.querySelector('#content');
+
+    repeatContent(content, outer.offsetWidth);
+
+    let el = outer.querySelector('#loop');
+    el.innerHTML = el.innerHTML + el.innerHTML;
+
+    function repeatContent(el, till) {
+      let html = el.innerHTML;
+      let counter = 0; // prevents infinite loop
+
+      while (el.offsetWidth < till && counter < 100) {
+        el.innerHTML += html;
+        counter += 1;
+      }
+    }
+  </script>
+</body>
+
+</html>
